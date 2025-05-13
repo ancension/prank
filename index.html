@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video with Audio Autoplay</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .fullscreen-container {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .center-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+    }
+    #titleText {
+      min-height: 4em;
+    }
+    video {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-dark text-white">
+
+  <div class="fullscreen-container d-flex justify-content-center align-items-center">
+    
+    <!-- Centered Overlay with Typing Title + Button -->
+    <div id="overlay" class="center-overlay">
+      <h2 id="titleText" class="mb-3"></h2>
+      <button id="playButton" class="btn btn-warning btn-lg" style="display: none;">Not Clickbait</button>
+    </div>
+
+    <!-- Responsive Video Container -->
+    <div class="ratio ratio-16x9" style="max-width: 90%; max-height: 90%;">
+      <video id="myVideo" preload="metadata" class="w-100 h-100">
+        <source src="RickRoll but make it Anime.mp4" type="video/mp4" />
+        Your browser doesn’t support HTML5 video.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const fullText = `Wa hafen Vella? Wa a yu crayeng agen? Ay no, Vamfire rayts? Vamfayr wil feyt to me! Ay prutek yu vela!`;
+    const words = fullText.split(" ");
+    const titleElement = document.getElementById("titleText");
+    const playButton = document.getElementById("playButton");
+    const video = document.getElementById("myVideo");
+    const overlay = document.getElementById("overlay");
+
+    let index = 0;
+
+    function typeWords() {
+      if (index < words.length) {
+        titleElement.textContent += (index === 0 ? "" : " ") + words[index];
+        index++;
+        setTimeout(typeWords, 250); // 250ms between words
+      } else {
+        playButton.style.display = "inline-block"; // Show button when typing finishes
+      }
+    }
+
+    typeWords(); // Start typing effect on load
+
+    playButton.addEventListener("click", () => {
+      video.muted = false;
+      video.play().then(() => {
+        overlay.style.display = "none"; // Hide both title and button
+      }).catch(err => {
+        alert("Playback failed: " + err);
+      });
+    });
+  </script>
+
+</body>
+</html>
