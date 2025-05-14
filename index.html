@@ -38,13 +38,13 @@
 
   <div class="fullscreen-container d-flex justify-content-center align-items-center">
     
-    <!-- Centered Overlay with Typing Title + Button -->
+
     <div id="overlay" class="center-overlay">
       <h2 id="titleText" class="mb-3"></h2>
       <button id="playButton" class="btn btn-primary btn-lg" style="display: none;">Click Me</button>
     </div>
 
-    <!-- Responsive Video Container -->
+  
     <div class="ratio ratio-16x9" style="max-width: 90%; max-height: 90%;">
       <video id="myVideo" preload="metadata" class="w-100 h-100">
         <source src="RickRoll but make it Anime.mp4" type="video/mp4" />
@@ -67,18 +67,18 @@
       if (index < words.length) {
         titleElement.textContent += (index === 0 ? "" : " ") + words[index];
         index++;
-        setTimeout(typeWords, 250); // 250ms between words
+        setTimeout(typeWords, 250);
       } else {
-        playButton.style.display = "inline-block"; // Show button when typing finishes
+        playButton.style.display = "inline-block";
       }
     }
 
-    typeWords(); // Start typing effect on load
+    typeWords(); 
 
     playButton.addEventListener("click", () => {
       video.muted = false;
       video.play().then(() => {
-        overlay.style.display = "none"; // Hide both title and button
+        overlay.style.display = "none"; 
       }).catch(err => {
         alert("Playback failed: " + err);
       });
